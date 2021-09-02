@@ -51,11 +51,11 @@ const displayBook= books=> {
     if(books.length===0) {
       toggleSpinner('none');
         const div=document.createElement('div');
-        wrongSearch.innerHTML=`<h3 class="text-danger text-center fw-bold">Sorry!No Result Found...</h3>`;
+        div.innerHTML=`<h3 class="text-danger text-center fw-bold">Sorry!No Result Found...</h3>`;
         wrongSearch.appendChild(div);        
     }
 
-    /**inserting total search result */
+    /**inserting result of total search result */
     totalResult.innerHTML = `<p>Showing result ${books.slice(0,30).length} of ${books.length}</p>`;
     resultsDiv.textContent = '';
     
