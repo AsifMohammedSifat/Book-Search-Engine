@@ -1,4 +1,3 @@
-
 const resultsDiv = document.getElementById('results-div');
 const totalResult = document.getElementById('total-result');
 const blankSearch = document.getElementById('blank-search');
@@ -13,7 +12,7 @@ const bodyResult = spinnerStyle => {
 }
 
 /*function fetching data by link */
-const loadBook=()=> {
+const loadBook = () => {
 
     /**functionCall-[spinner showed and body result hide when loading]*/
     toggleSpinner('block');
@@ -26,43 +25,46 @@ const loadBook=()=> {
 
     /**test for blank search */
     if (searchText.value.length === 0) {
-          toggleSpinner('none');
-          const div =document.createElement('div');
-           div.innerHTML = `<h3 class="text-danger text-center fw-bold">Opps!Please Write Something...</h3>`;
-          blankSearch.appendChild(div);
-    }else{
-        /**remove error msg when new search occur */    
-          document.getElementById('blank-search').textContent = '';
+        toggleSpinner('none');
+        blankSearch.textContent = '';
+        const div = document.createElement('div');
+        div.innerHTML = `<h3 class="text-danger text-center fw-bold">Opps!Please Write Something...</h3>`;
+        blankSearch.appendChild(div);
 
-        
+    } else {
+        /**remove error msg when new search occur */
+        document.getElementById('blank-search').textContent = '';
+
+
         const url = `https://openlibrary.org/search.json?q=${searchValue}`;
-        searchText.value='';       
+        searchText.value = '';
         fetch(url)
             .then(res => res.json())
             .then(data => displayBook(data.docs));
-            
+
     }
 }
 
 /**function for display books based on search */
-const displayBook= books=> {
-  
+const displayBook = books => {
+
     /**test for unauthorize search */
-    if(books.length===0) {
-      toggleSpinner('none');
-        const div=document.createElement('div');
-        div.innerHTML=`<h3 class="text-danger text-center fw-bold">Sorry!No Result Found...</h3>`;
-        wrongSearch.appendChild(div);        
+    if (books.length === 0) {
+        toggleSpinner('none');
+        wrongSearch.textContent = '';
+        const div = document.createElement('div');
+        div.innerHTML = `<h3 class="text-danger text-center fw-bold">Sorry!No Result Found...</h3>`;
+        wrongSearch.appendChild(div);
     }
 
     /**inserting result of total search result */
     totalResult.innerHTML = `<p>Showing result ${books.slice(0,30).length} of ${books.length}</p>`;
     resultsDiv.textContent = '';
-    
+
 
     /**inserting each result in the  result-div */
-    books.slice(0,30).forEach(book => {
-        
+    books.slice(0, 30).forEach(book => {
+
         const div = document.createElement('div');
         div.innerHTML = `
             <div class="card h-100 border border-success rounded-3">
@@ -83,13 +85,14 @@ const displayBook= books=> {
 
     });
 
-     /**function -spinner hide and body result showed after loading*/
+    /**function -spinner hide and body result showed after loading*/
     toggleSpinner('none');
     bodyResult('block');
 }
 
 /**remove content when new search occur */
-document.getElementById('search-btn').addEventListener('click',()=>{
-    document.getElementById('total-result').textContent='';
-    document.getElementById('wrong-search').textContent='';
+document.getElementById('search-btn').addEventListener('click', () => {
+    document.getElementById('total-result').textContent = '';
+    document.getElementById('wrong-search').textContent = '';
+
 });
