@@ -34,7 +34,7 @@ const loadBook=()=> {
           document.getElementById('blank-search').textContent = '';
 
         
-        const url = `http://openlibrary.org/search.json?q=${searchValue}`;
+        const url = `https://openlibrary.org/search.json?q=${searchValue}`;
         searchText.value='';       
         fetch(url)
             .then(res => res.json())
