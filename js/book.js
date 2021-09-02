@@ -30,8 +30,6 @@ const loadBook = () => {
         const div = document.createElement('div');
         div.innerHTML = `<h3 class="text-danger text-center fw-bold">Opps!Please Write Something...</h3>`;
         blankSearch.appendChild(div);
-        document.getElementById('search-result').textContent = '';
-        document.getElementById('total-result').style.display = 'none';
     } else {
         /**remove error msg when new search occur */
         document.getElementById('blank-search').textContent = '';
