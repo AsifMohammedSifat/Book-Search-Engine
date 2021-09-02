@@ -1,10 +1,8 @@
-/**anchoring search result div */
-const resultsDiv = document.getElementById('results-div');
 
-/**anchoring total number of search result */
+const resultsDiv = document.getElementById('results-div');
 const totalResult = document.getElementById('total-result');
 
-/**function for display spinner style & display body style(block/none)*/
+/**function style--for display spinner  & display body (block/none)*/
 const toggleSpinner = spinnerStyle => {
     document.getElementById('spinner').style.display = spinnerStyle;
 }
@@ -12,10 +10,10 @@ const bodyResult = spinnerStyle => {
     document.getElementById('search-result').style.display = spinnerStyle;
 }
 
-/*fetching data by link function */
+/*function fetching data by link */
 const loadBook=()=> {
 
-    /**spinner showed and body result hide when loading*/
+    /**functionCall-[spinner showed and body result hide when loading]*/
     toggleSpinner('block');
     bodyResult('none');
 
@@ -30,7 +28,7 @@ const loadBook=()=> {
           const div = document.getElementById('blank-search').innerHTML = `<h3 class="text-danger text-center fw-bold">Opps!Please Write Something...</h3>`;
           resultsDiv.appendChild(div);
     }else{
-        /**remove error msg when new search start */    
+        /**remove error msg when new search occur */    
           document.getElementById('blank-search').textContent = '';
 
         
@@ -44,19 +42,21 @@ const loadBook=()=> {
 }
 
 /**function for display books based on search */
-const displayBook= books => {
+const displayBook= books=> {
   
     /**test for unauthorize search */
-  if (books.length===0) {
+    if(books.length===0) {
       toggleSpinner('none');
         const div=document.getElementById('wrong-search').innerHTML=`<h3 class="text-danger text-center fw-bold">Opps!No Result Found...</h3>`;
         resultsDiv.appendChild(div);        
     }
+
+    /**inserting total search result */
     totalResult.innerHTML = `<p>Showing result ${books.slice(0,30).length} of ${books.length}</p>`;
     resultsDiv.textContent = '';
     
 
-    /**insert each result in the  result-div */
+    /**inserting each result in the  result-div */
     books.slice(0,30).forEach(book => {
         
         const div = document.createElement('div');
@@ -79,13 +79,13 @@ const displayBook= books => {
 
     });
 
-     /**spinner hide and body result showed after loading*/
+     /**function -spinner hide and body result showed after loading*/
     toggleSpinner('none');
     bodyResult('block');
 }
 
-/**remove content when new search start */
+/**remove content when new search occur */
 document.getElementById('search-btn').addEventListener('click',function(){
     document.getElementById('total-result').textContent='';
     document.getElementById('wrong-search').textContent='';
-})
+});
