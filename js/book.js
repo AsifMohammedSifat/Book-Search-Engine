@@ -25,7 +25,7 @@ const loadBook=()=> {
 
 
     /**test for blank search */
-    if (searchText.value.length == 0) {
+    if (searchText.value.length === 0) {
           toggleSpinner('none');
           const div = document.getElementById('blank-search').innerHTML = `<h3 class="text-danger text-center fw-bold">Opps!Please Write Something...</h3>`;
           resultsDiv.appendChild(div);
