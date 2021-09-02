@@ -1,6 +1,8 @@
 
 const resultsDiv = document.getElementById('results-div');
 const totalResult = document.getElementById('total-result');
+const blankSearch = document.getElementById('blank-search');
+const wrongSearch = document.getElementById('wrong-search');
 
 /**function style--for display spinner  & display body (block/none)*/
 const toggleSpinner = spinnerStyle => {
@@ -25,8 +27,9 @@ const loadBook=()=> {
     /**test for blank search */
     if (searchText.value.length === 0) {
           toggleSpinner('none');
-          const div = document.getElementById('blank-search').innerHTML = `<h3 class="text-danger text-center fw-bold">Opps!Please Write Something...</h3>`;
-          resultsDiv.appendChild(div);
+          const div =document.createElement('div');
+           div.innerHTML = `<h3 class="text-danger text-center fw-bold">Opps!Please Write Something...</h3>`;
+          blankSearch.appendChild(div);
     }else{
         /**remove error msg when new search occur */    
           document.getElementById('blank-search').textContent = '';
@@ -47,8 +50,9 @@ const displayBook= books=> {
     /**test for unauthorize search */
     if(books.length===0) {
       toggleSpinner('none');
-        const div=document.getElementById('wrong-search').innerHTML=`<h3 class="text-danger text-center fw-bold">Opps!No Result Found...</h3>`;
-        resultsDiv.appendChild(div);        
+        const div=document.createElement('div');
+        wrongSearch.innerHTML=`<h3 class="text-danger text-center fw-bold">Sorry!No Result Found...</h3>`;
+        wrongSearch.appendChild(div);        
     }
 
     /**inserting total search result */
@@ -85,7 +89,7 @@ const displayBook= books=> {
 }
 
 /**remove content when new search occur */
-document.getElementById('search-btn').addEventListener('click',function(){
+document.getElementById('search-btn').addEventListener('click',()=>{
     document.getElementById('total-result').textContent='';
     document.getElementById('wrong-search').textContent='';
 });
